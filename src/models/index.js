@@ -1,16 +1,16 @@
+import { CategoriasProductos, CategoriasProductosSchema, CATEGORIAS_PRODUCTOS_TABLA } from './categorias.modelo.js';
 import { Productos, ProductosSchema, PRODUCTOS_TABLA } from './productos.modelo.js';
-// Importar otros modelos aquí si tienes más
+import { Clientes, ClientesSchema, CLIENTES_TABLA } from './clientes.modelo.js'; 
 
 function setupModels(sequelize) {
-  // Inicializar el modelo Productos
   Productos.init(ProductosSchema, Productos.config(sequelize));
+  CategoriasProductos.init(CategoriasProductosSchema, CategoriasProductos.config(sequelize));
+  Clientes.init(ClientesSchema, Clientes.config(sequelize)); // Inicializar el modelo Clientes
 
-  // Agregar otros modelos aquí si tienes más
-  // Ejemplo:
-  // Categoria.init(CategoriaSchema, Categoria.config(sequelize));
-
-  // Ejecutar las asociaciones de cada modelo
-  // Categoria.associate(sequelize.models); // Si tienes otros modelos relacionados
+  // Asociaciones
+  CategoriasProductos.associate(sequelize.models);
+  Productos.associate(sequelize.models);
+  // Clientes.associate(sequelize.models); // Si el modelo Clientes tiene asociaciones
 }
 
 export default setupModels;

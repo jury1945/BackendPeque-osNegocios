@@ -22,17 +22,32 @@ const ProductosSchema = {
   stock: {
     type: DataTypes.INTEGER,
     allowNull: false
+  },
+  // Aquí agregamos la relación con la tabla CategoriasProductos
+  id_categoria: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: 'categorias_productos', // Cambiado a minúsculas para coincidir con la convención de PostgreSQL
+      key: 'id_categoria'
+    }
   }
 };
 
 class Productos extends Model {
-//   static associate(models) {
-//     // Definir la asociación con DetallesFactura si existe
-//     this.hasMany(models.DetallesFactura, { 
-//       as: 'detallesFactura', 
-//       foreignKey: 'id_producto' 
-//     });
-//   }
+  static associate(models) {
+    // Definir la asociación con DetallesFactura si existe
+    // this.hasMany(models.DetallesFactura, { 
+    //   as: 'detallesFactura', 
+    //   foreignKey: 'id_producto' 
+    // });
+
+    // Asociación con la tabla CategoriasProductos (N:1)
+    this.belongsTo(models.CategoriasProductos, { 
+      as: 'categoria', 
+      foreignKey: 'id_categoria' 
+    });
+  }
 
   static config(sequelize) {
     return {
