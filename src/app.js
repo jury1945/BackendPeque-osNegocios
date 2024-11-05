@@ -5,8 +5,12 @@ import usuariosRouter from './Routes/usuarios.routes.js';
 import rolesRouter from './Routes/roles.routes.js';
 import productosRouter from './Routes/productos.routes.js';
 import categoriasRouter from './Routes/categorias.routes.js'
-
+import autenticacionRouter from './Routes/autenticacion.routes.js'
 import { corsMiddleware } from './middlewares/cors.js';
+import clientesRouter from './Routes/clientes.routes.js'
+import facturasRouter from './Routes/facturas.routes.js'
+import ventasRouter from './Routes/ventas.routes.js'
+import reportesRouter from './Routes/reportes.routes.js'
 import dotenv from 'dotenv';
 
 dotenv.config(); // Carga la configuración de dotenv antes de usar process.env
@@ -19,11 +23,16 @@ app.use(express.json());
 app.use(corsMiddleware());
 app.use(logRequest); // Mueve esto antes de las rutas
 
-// Usa las rutas de usuario
+app.use('/autenticacion',autenticacionRouter);
 app.use('/api/usuarios', usuariosRouter);
 app.use('/api/roles', rolesRouter);
 app.use('/api/productos', productosRouter);
 app.use('/api/categorias',categoriasRouter)
+app.use ('/api/clientes',clientesRouter);
+app.use('/api/facturas', facturasRouter);
+app.use('/api/ventas', ventasRouter);
+app.use('/api/reportes',reportesRouter)
+
 
 // Middleware para manejo de errores
 app.use((err, req, res, next) => {
