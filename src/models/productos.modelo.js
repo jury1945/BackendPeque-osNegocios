@@ -36,11 +36,7 @@ const ProductosSchema = {
 
 class Productos extends Model {
   static associate(models) {
-    // Definir la asociación con DetallesFactura si existe
-    // this.hasMany(models.DetallesFactura, { 
-    //   as: 'detallesFactura', 
-    //   foreignKey: 'id_producto' 
-    // });
+  
 
     // Asociación con la tabla CategoriasProductos (N:1)
     this.belongsTo(models.CategoriasProductos, { 
